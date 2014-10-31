@@ -1,0 +1,286 @@
+<experiment seed="2">
+	<job times_to_sample="3" name="yeast"> 
+		<Graphs>
+		<!--
+			<Graph class="BarabasiAlbertGraphGenerator">
+				<folder_name>Barabasi-Albert</folder_name>
+				<params>
+					<param>
+						<param_name>n</param_name>
+						<param_value type="int">1000</param_value>
+					</param>
+					<param>
+						<param_name>m</param_name>
+						<param_value type="int">10</param_value>
+					</param>
+				</params>
+			</Graph>  
+			<Graph class="WattsStrogatzGraphGenerator">			
+				<folder_name>Watts-Strogatz</folder_name>
+				<params>
+					<param>
+						<param_name>n</param_name>
+						<param_value type="int">50000</param_value>
+					</param>
+					<param>
+						<param_name>k</param_name>
+						<param_value type="int">20</param_value>
+					</param>
+					<param>
+						<param_name>p</param_name>
+						<param_value type="float">0.5</param_value>
+					</param>
+				</params>
+			</Graph> 
+			 
+			<Graph class="ErdosRenyiGraphGenerator">
+				<folder_name>Erdos-Renyi</folder_name>
+				<params>
+					<param>
+						<param_name>n</param_name>
+						<param_value type="int">50000</param_value>
+					</param>
+					<param>
+						<param_name>p</param_name>
+						<param_value type="float">0.0004</param_value>
+					</param>
+				</params>
+			</Graph>
+			-->
+			<Graph class="FromFileGraphGenerator">
+				<folder_name>COAUTHOR</folder_name>
+				<distribution_file_name>/home/ecem/eclipse-repos/CONS_RESULTS/networks_real/population_distr/coauthor_normalized_distr_of_chars.pickle</distribution_file_name>
+				<params>
+					<param>
+						<param_name>path_to_file</param_name>
+						<!-- caida20071105 -->
+						<param_value type="str">../networks_real/ca-condmat.txt</param_value>
+					</param>
+					<param>
+						<param_name>name</param_name>
+						<param_value type="str">Coauthor Graph</param_value>
+					</param>
+					<param>
+						<param_name>abbreviation</param_name>
+						<param_value type="str">COAUTHOR</param_value>
+					</param>
+				</params>
+			</Graph>
+			
+			<!--
+			<Graph class="FromFileGraphGenerator">
+                                <name>Arxiv COND-MAT Co-author Graph</name>
+                                <params>
+                                        <param>
+                                                <param_name>path_to_file</param_name>
+                                                <param_value type="str">../CONS_RESULTS/networks_real/ca-condmat.txt</param_value>
+                                        </param>
+                                        <param> 
+                                                <param_name>name</param_name>
+                                                <param_value type="str">Arxiv COND-MAT Co-author Graph</param_value>
+                                        </param>
+                                        <param> 
+                                                <param_name>abbreviation</param_name>
+                                                <param_value type="str">CO-AUTHOR</param_value>
+                                        </param>
+                                </params>
+                        </Graph>
+			<Graph class="FromFileGraphGenerator">
+                                <name>Enron E-mail Communication Graph</name>
+                                <params>
+                                        <param>
+                                                <param_name>path_to_file</param_name>
+                                                <param_value type="str">../CONS_RESULTS/networks_real/email-enron.txt</param_value>
+                                        </param>
+                                        <param> 
+                                                <param_name>name</param_name>
+                                                <param_value type="str">Enron E-mail Communication Graph</param_value>
+                                        </param>
+                                        <param> 
+                                                <param_name>abbreviation</param_name>
+                                                <param_value type="str">ENRON</param_value>
+                                        </param>
+                                </params>
+                        </Graph>
+		-->
+		</Graphs>
+		<Features> 
+			<Feature class="SimpleGraphDegree">
+				<name>Degree</name>
+			</Feature> 
+			 
+			<Feature class="SimpleGraphClusteringCoefficient">
+				<name>Clustering Coefficient</name>
+			</Feature>
+			<Feature class="SimpleGraphPathLength">
+				<name>Path Length</name>
+			</Feature>
+			
+		</Features>
+		<Queries> 
+			<Query class ='BackendQuery'>
+				<name>Backend Query</name>
+			</Query>
+			<Query class='FrontendQuery'>
+				<name>Frontend Query</name>
+			</Query>
+		</Queries>
+		<Samplers>
+			<Sampler class="KKPathSampler">
+				<name>KK Path Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">145</param_value>
+					</param>
+					<param>
+						<param_name>K</param_name>
+						<param_value type="int">50</param_value>
+					</param>
+					<param>
+						<param_name>stopping_condition</param_name>
+						<param_value type="str">Unique_Nodes</param_value>
+					</param>
+					<param>
+						<param_name>fuzzy_select</param_name>
+						<param_value type="bool">True</param_value>
+					</param>
+				</params>
+			</Sampler>
+			<Sampler class="KMPathSampler">
+				<name>KM Path Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">245</param_value>
+					</param>
+					<param>
+						<param_name>K</param_name>
+						<param_value type="int">50</param_value>
+					</param>
+					<param>
+						<param_name>M</param_name>
+						<param_value type="int">100</param_value>
+					</param>
+					<param>
+						<param_name>stopping_condition</param_name>
+						<param_value type="str">Unique_Nodes</param_value>
+					</param>
+					<param>
+						<param_name>fuzzy_select</param_name>
+						<param_value type="bool">True</param_value>
+					</param>
+				</params>
+			</Sampler>
+			
+			<Sampler class="RandomPathSampler">
+				<name>Random Path Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">145</param_value>
+					</param>
+					<param>
+						<param_name>stopping_condition</param_name>
+						<param_value type="str">Unique_Nodes</param_value>
+					</param>
+				</params>
+			</Sampler>  
+			<Sampler class="MetropolizedRandomWalkSampler">
+				<name>Metropolized Random Walk Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">145</param_value>
+					</param>
+					<param>
+						<param_name>stopping_condition</param_name>
+						<param_value type="str">Unique_Nodes</param_value>
+					</param>
+					<param>
+						<param_name>excluded_initial_steps</param_name>
+						<param_value type="int">0</param_value>
+					</param>
+				</params>
+			</Sampler> 
+			<Sampler class="RandomWalkSampler">
+				<name>Random Walk Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">145</param_value>
+					</param>
+					<param>
+						<param_name>stopping_condition</param_name>
+						<param_value type="str">Unique_Nodes</param_value>
+					</param>
+					<param>
+						<param_name>excluded_initial_steps</param_name>
+						<param_value type="int">0</param_value>
+					</param>
+				</params>
+			</Sampler>
+			<Sampler class="RandomVertexSampler">
+				<name>Random Vertex Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">145</param_value>
+					</param>
+					<param>
+						<param_name>with_replacement</param_name>
+						<param_value type="bool">False</param_value>
+					</param>
+				</params>
+			</Sampler>
+			<Sampler class="InducedRandomVertexSampler">
+				<name>Induced Random Vertex Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">145</param_value>
+					</param>
+					<param>
+						<param_name>with_replacement</param_name>
+						<param_value type="bool">False</param_value>
+					</param>
+				</params>
+			</Sampler>
+			<Sampler class="RandomEdgeSampler">
+				<name>Random Edge Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">145</param_value>
+					</param>
+					<param>
+						<param_name>stopping_condition</param_name>
+						<param_value type="str">Unique_Nodes</param_value>
+					</param>
+					<param>
+						<param_name>with_replacement</param_name>
+						<param_value type="bool">False</param_value>
+					</param>
+				</params>
+			</Sampler>
+			<Sampler class="InducedRandomEdgeSampler">
+				<name>Induced Random Edge Sampler</name>
+				<params>
+					<param>
+						<param_name>sample_size</param_name>
+						<param_value type="int">145</param_value>
+					</param>
+					<param>
+						<param_name>stopping_condition</param_name>
+						<param_value type="str">Unique_Nodes</param_value>
+					</param>
+					<param>
+						<param_name>with_replacement</param_name>
+						<param_value type="bool">False</param_value>
+					</param>
+				</params>
+			</Sampler>
+			-->
+		</Samplers>
+	</job>
+</experiment>
