@@ -1,9 +1,0 @@
-       clustering coefficient  degree  path length
-count            3.000000e+00       3            3
-mean             9.710000e-01       1            1
-std              1.490116e-08       0            0
-min              9.710000e-01       1            1
-25%              9.710000e-01       1            1
-50%              9.710000e-01       1            1
-75%              9.710000e-01       1            1
-max              9.710000e-01       1            1
