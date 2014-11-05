@@ -15,6 +15,7 @@ import analytics.helpers.Dict_operations as dict_ops
 import analytics.plotting.SamplerPlotter as sampler_plotter
 import analytics.plotting.DescriptiveStatsPlotter as descriptive_stats_plotter
 import analytics.plotting.DistributionPlotter as distribution_plotter
+from numpy.core.numeric import broadcast
 
 __all__=['AnalysisGroup','Analysis','SamplerAnalysis', 'SamplerBoxplotAnalysis','SamplerDescriptiveAnalysis','SamplerDistributionPlotAnalysis','SamplerPdfCdfPlotAnalysis', \
          'GraphDistributionPlotAnalysis','GraphDensityPlotAnalysis', 'CombinedAnalysis', 'PopulationAnalysis', 'PopulationFeaturesPlotAnalysis']
@@ -191,7 +192,8 @@ class SamplerPdfCdfPlotAnalysis(SamplerAnalysis):
         t_panel=panel.transpose(1,0,2)
         for query  in t_panel.items:
             dic={}
-            for (feature,distribution) in t_panel[query].apply(dict_ops.avg_list_of_dictionaries,axis=0).iteritems():
-                dic[feature]=distribution
-            
+            #for (feature,distribution) in t_panel[query].apply(dict_ops.avg_list_of_dictionaries,axis=0, reduce=False).iteritems():
+            #    dic[feature]=distribution          
+            for feature in t_panel[query].columns:
+                dic[feature] = dict_ops.avg_list_of_dictionaries(t_panel[query][feature].tolist())
             descriptive_stats_plotter.save_pdf_cdf_plot_for_a_single_graph(dic, self.title, statistics_included=True, file_name= self.file_name.rsplit('.',1)[0]+'_'+query+'.'+self.file_name.rsplit('.',1)[1])

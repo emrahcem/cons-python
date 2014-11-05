@@ -23,10 +23,10 @@ logger= logging.getLogger(__name__)
 def createPanel5D(dic):
     Panel5D = panelnd.create_nd_panel_factory(
                                                   klass_name   = 'Panel5D',
-                                                  axis_orders  = [ 'graphs', 'samplers','experiments','queries','features'],
-                                                  axis_slices  = { 'samplers' : 'labels', 'experiments' : 'items', 'queries' : 'major_axis', 'features' : 'minor_axis' },
+                                                  orders  = [ 'graphs', 'samplers','experiments','queries','features'],
+                                                  slices  = { 'samplers' : 'labels', 'experiments' : 'items', 'queries' : 'major_axis', 'features' : 'minor_axis' },
                                                   slicer       = Panel4D,
-                                                  axis_aliases = { 'major' : 'major_axis', 'minor' : 'minor_axis' },
+                                                  aliases = { 'major' : 'major_axis', 'minor' : 'minor_axis' },
                                                   stat_axis    = 2)            
     p_5d=Panel5D.from_dict(dic)
     return p_5d

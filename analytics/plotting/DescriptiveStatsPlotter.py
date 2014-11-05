@@ -107,7 +107,6 @@ def plot_single_distribution(normalized_distr, cdf=True, xlabel=None, title=None
         axis.set_xlabel(xlabel) 
     if title is not None:
         axis.set_title(title) 
-
     if not cdf and not analytics.isValidPDF(normalized_distr):
         raise sampling.InvalidProbabilityDensityException('Invalid probability density')
             
@@ -195,5 +194,5 @@ if __name__ == "__main__":
     save_pdf_cdf_plot_for_a_single_graph(res)
     #save_pdf_plot_for_a_single_graph(res, file_name='line.pdf', ls=':', marker='.')
     #save_pdf_cdf_plot_for_a_single_graph(res, file_name='bar.pdf')
-    import matplotlib as mpl
-    print mpl.__version__
+    #import matplotlib as mpl
+    #print mpl.__version__

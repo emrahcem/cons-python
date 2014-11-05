@@ -114,7 +114,11 @@ def plot_distributions_for_single_graph(graph_dic, fig_title, divergence=None, c
         for j,query in enumerate(data.queries):
             #if feature== 'clustering coefficient' and query == "Frontend Query":
             df=data.ix[:,:,query,feature].dropna(axis=1)
-            df=pnd.DataFrame.from_dict(dict([(sampler,dist) for sampler,dist in df.apply(analytics.avg_list_of_dictionaries,axis=0).iteritems()]))
+            temp_dic={}
+            for column in df.columns:
+                temp_dic[column]=analytics.avg_list_of_dictionaries(df[column].tolist())
+            df=pnd.DataFrame.from_dict(temp_dic)
+            #df=pnd.DataFrame.from_dict(dict([(sampler,dist) for sampler,dist in df.apply(analytics.avg_list_of_dictionaries,axis=0).iteritems()]))
             
             if plot_dims==None or plot_dims[0]*plot_dims[1] != len(data.features)*len(data.queries): 
                 #fig.set_size_inches(len(data.features)*len(data.queries)*single_fig_size[0], single_fig_size[1])

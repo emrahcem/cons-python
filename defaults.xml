@@ -1,7 +1,6 @@
 <experiment seed="2">
 	<job times_to_sample="3" name="yeast"> 
 		<Graphs>
-		<!--
 			<Graph class="BarabasiAlbertGraphGenerator">
 				<folder_name>Barabasi-Albert</folder_name>
 				<params>
@@ -15,12 +14,13 @@
 					</param>
 				</params>
 			</Graph>  
+			
 			<Graph class="WattsStrogatzGraphGenerator">			
 				<folder_name>Watts-Strogatz</folder_name>
 				<params>
 					<param>
 						<param_name>n</param_name>
-						<param_value type="int">50000</param_value>
+						<param_value type="int">1000</param_value>
 					</param>
 					<param>
 						<param_name>k</param_name>
@@ -32,7 +32,7 @@
 					</param>
 				</params>
 			</Graph> 
-			 
+			<!-- 
 			<Graph class="ErdosRenyiGraphGenerator">
 				<folder_name>Erdos-Renyi</folder_name>
 				<params>
@@ -46,14 +46,12 @@
 					</param>
 				</params>
 			</Graph>
-			-->
 			<Graph class="FromFileGraphGenerator">
 				<folder_name>COAUTHOR</folder_name>
 				<distribution_file_name>/home/ecem/eclipse-repos/CONS_RESULTS/networks_real/population_distr/coauthor_normalized_distr_of_chars.pickle</distribution_file_name>
 				<params>
 					<param>
 						<param_name>path_to_file</param_name>
-						<!-- caida20071105 -->
 						<param_value type="str">../networks_real/ca-condmat.txt</param_value>
 					</param>
 					<param>
@@ -67,7 +65,6 @@
 				</params>
 			</Graph>
 			
-			<!--
 			<Graph class="FromFileGraphGenerator">
                                 <name>Arxiv COND-MAT Co-author Graph</name>
                                 <params>
@@ -131,7 +128,7 @@
 				<params>
 					<param>
 						<param_name>sample_size</param_name>
-						<param_value type="int">145</param_value>
+						<param_value type="int">100</param_value>
 					</param>
 					<param>
 						<param_name>K</param_name>
@@ -152,7 +149,7 @@
 				<params>
 					<param>
 						<param_name>sample_size</param_name>
-						<param_value type="int">245</param_value>
+						<param_value type="int">100</param_value>
 					</param>
 					<param>
 						<param_name>K</param_name>
@@ -160,7 +157,7 @@
 					</param>
 					<param>
 						<param_name>M</param_name>
-						<param_value type="int">100</param_value>
+						<param_value type="int">50</param_value>
 					</param>
 					<param>
 						<param_name>stopping_condition</param_name>
@@ -172,7 +169,7 @@
 					</param>
 				</params>
 			</Sampler>
-			
+			<!--
 			<Sampler class="RandomPathSampler">
 				<name>Random Path Sampler</name>
 				<params>

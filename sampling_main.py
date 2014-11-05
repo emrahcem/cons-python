@@ -3,9 +3,7 @@
 '''
 sampling -- Sampling Algorithms
 
-sampling is a description
-
-It defines classes_and_methods
+This is the main class to run the experiment
 
 @author:     Emrah Cem(emrah.cem@utdallas.edu)
         

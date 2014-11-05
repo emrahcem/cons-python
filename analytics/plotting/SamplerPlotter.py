@@ -25,7 +25,10 @@ def plot_sampler_distribution(panel, pop_dic=None, cdf=True, plot_each_exp=False
 
     shared_ax=None
     for i,feature in enumerate(panel.minor_axis):
-        for j,(query,distribution) in enumerate(panel.minor_xs(feature).apply(analytics.Dict_operations.avg_list_of_dictionaries,axis=1).iteritems()): # row:query name , values= Series where each element is a distribution from a single experiment 
+        #for j,(query,distribution) in enumerate(panel.minor_xs(feature).apply(analytics.Dict_operations.avg_list_of_dictionaries,axis=1).iteritems()): # row:query name , values= Series where each element is a distribution from a single experiment
+        for j,query in enumerate(panel.minor_xs(feature).T.columns):
+            distribution=analytics.Dict_operations.avg_list_of_dictionaries(panel.minor_xs(feature).T[query])
+         
             if i+j==0:
                 axes=plt.subplot(len(panel.minor_axis),len(panel.major_axis),i*len(panel.major_axis)+j+1)
                 axes.set_ylim((0,1))
@@ -35,8 +38,7 @@ def plot_sampler_distribution(panel, pop_dic=None, cdf=True, plot_each_exp=False
             #plot each experiment
             if plot_each_exp:
                 for _,v in panel.minor_xs(feature).ix[query].iteritems(): 
-                    if cdf:
-                        if(analytics.trim_cdf(v)):
+                    if(analytics.trim_cdf(v)):
                             Series(v).cumsum().plot(ax=axes) 
                     else:
                         if(analytics.trim_pdf(v)):
