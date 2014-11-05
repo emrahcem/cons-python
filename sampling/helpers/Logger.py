@@ -18,8 +18,8 @@ log = logging.getLogger(__name__)
 __all__=['create_logger','log_graph_generation','log_sampler','log_sample_no','timed']
 
 def create_logger():
- 
     logger=logging.getLogger()
+    
     logger.setLevel(logging.DEBUG)
     formatter = logging.Formatter('%(asctime)s - %(module)-20s - %(levelname)-6s - %(message)s')
     if len(logger.handlers):

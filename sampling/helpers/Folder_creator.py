@@ -21,14 +21,15 @@ def create_job_folder(job_name, input_file):
         else:
             os.makedirs(job_name)
             created_folder_name=job_name
+        #print os.path.curdir(), os.path.basename(input_file)
         temp=os.getcwd()
-        
         abs_path=os.path.abspath(input_file)
         new_path=os.path.split(abs_path)[0]+'/'+created_folder_name+'/'+input_file
         os.chdir(os.path.join(temp,created_folder_name))
+        #print abs_path,
         import shutil
-        
-        shutil.copyfile(abs_path , new_path)
+        shutil.copyfile(abs_path , os.path.join(os.path.curdir,os.path.basename(abs_path)))
+        #shutil.copyfile(abs_path , new_path)
     except Exception as e:
         log.exception(e)
     else:
