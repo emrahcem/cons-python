@@ -74,7 +74,7 @@ class PopulationFeaturesPlotAnalysis(PopulationAnalysis):
         super(PopulationFeaturesPlotAnalysis, self).__init__(data, title, file_name)
     
     def analyze(self):
-        descriptive_stats_plotter.save_pdf_cdf_plot_for_a_single_graph(self.data, self.title, statistics_included=True, file_name=self.file_name)
+        descriptive_stats_plotter.save_pdf_cdf_plot_for_a_single_graph(self.data, self.title, statistics_included=True, file_name=self.file_name, show=False)
         
            
 class CombinedAnalysis(Analysis):
@@ -151,11 +151,12 @@ class SamplerDescriptiveAnalysis(SamplerAnalysis):
 
 class SamplerBoxplotAnalysis(SamplerAnalysis):
     
-    def __init__(self, sampler_dic, pop_dic, divergence=divergence_metrics.JensenShannonDivergence, title=None, file_name='boxplot.pdf'):
+    def __init__(self, sampler_dic, pop_dic, divergence=divergence_metrics.JensenShannonDivergence, title=None, file_name='boxplot.pdf', show=False):
         super(SamplerBoxplotAnalysis, self).__init__(sampler_dic,pop_dic, title, file_name)
         self.divergence=divergence
         self.title=title
-    
+        self.show=show
+        
     def analyze(self):
         pnl=self.get_divergence_scores_panel(self.divergence)
         pickle.dump(pnl, open(os.path.join(os.path.dirname(self.file_name),'divergence_scores_panel.pickle'),'w') )
@@ -172,7 +173,10 @@ class SamplerBoxplotAnalysis(SamplerAnalysis):
             else:
                 plt.title(self.title+' ('+query+')')
             fig.savefig(self.file_name.rsplit('.',1)[0]+'_'+query+'.'+self.file_name.rsplit('.',1)[1])
-
+        if self.show:
+            plt.show()
+            plt.close()
+            #plt.clf()
 
 class SamplerDistributionPlotAnalysis(SamplerAnalysis):
     def __init__(self, sampler_dic,pop_dic, title='Characteristic Distributions in the sample graph', file_name='CDF_with_population_distribution.pdf'):
@@ -190,10 +194,12 @@ class SamplerPdfCdfPlotAnalysis(SamplerAnalysis):
     def analyze(self):
         panel=Panel.from_dict(self.sampler_dic)
         t_panel=panel.transpose(1,0,2)
-        for query  in t_panel.items:
+        num_of_queries= len(t_panel.items)
+        for i,query  in enumerate(t_panel.items):
             dic={}
             #for (feature,distribution) in t_panel[query].apply(dict_ops.avg_list_of_dictionaries,axis=0, reduce=False).iteritems():
             #    dic[feature]=distribution          
             for feature in t_panel[query].columns:
                 dic[feature] = dict_ops.avg_list_of_dictionaries(t_panel[query][feature].tolist())
-            descriptive_stats_plotter.save_pdf_cdf_plot_for_a_single_graph(dic, self.title, statistics_included=True, file_name= self.file_name.rsplit('.',1)[0]+'_'+query+'.'+self.file_name.rsplit('.',1)[1])
+            descriptive_stats_plotter.save_pdf_cdf_plot_for_a_single_graph(dic, self.title+'\n('+query+')', statistics_included=True, file_name= self.file_name.rsplit('.',1)[0]+'_'+query+'.'+self.file_name.rsplit('.',1)[1], show=True if i==num_of_queries-1 else False)
+            

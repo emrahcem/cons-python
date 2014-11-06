@@ -48,7 +48,7 @@ class SampleAnalyzer(Analyzer):
         plt.legend()
         plt.ylim((0,1))
         plt.show()
-        
+        plt.clf()
     def analyze(self, feature_dic, orig_dic, save_to_file=True):
         df=DataFrame({'sample':Series(feature_dic), 'original':Series(orig_dic)})
         self._plot(df)
@@ -124,7 +124,7 @@ class SeriesPlotter(Plotter):
    
 class DataFramePlotter(Plotter):
     def plot_data(self, df,  cumulative=False, show=False, saveTo=None, *args, **kwds):
-        figure.Figure()
+        plt.figure()
         df=df.fillna(0)
         if cumulative:
             df.cumsum().plot(*args, **kwds)
@@ -152,6 +152,7 @@ class DataFramePlotter(Plotter):
                 else:
                     plt.savefig(os.path.join(saveTo,'fig.eps'))
                     plt.savefig(os.path.join(saveTo,'fig.pdf'))
+        plt.show()
         plt.clf()
     
 #===============================================================================

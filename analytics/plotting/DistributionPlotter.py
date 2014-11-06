@@ -178,6 +178,7 @@ def save_distributions_for_single_graph(graph_dic, fig_title, divergence=None, c
     fig.subplots_adjust(top=0.8)
     title,leg=plot_distributions_for_single_graph(graph_dic, fig_title, divergence=divergence, cdf=cdf, single_fig_size=single_fig_size, plot_dims=plot_dims)
     fig.savefig(file_name, bbox_inches='tight', bbox_extra_artists=(title,leg))
+    plt.clf()
     
 def plot_distributions_for_all_graphs(dic, fig_title, divergence=None, cdf=True, single_fig_size=(6,4), file_name='distribution_for_all_graphs.pdf'):
 
@@ -236,7 +237,9 @@ def plot_distributions_for_all_graphs(dic, fig_title, divergence=None, cdf=True,
     leg.get_frame().set_edgecolor('black')
     sup_title=fig.suptitle(fig_title, fontsize=22, y=0.99)
     fig.savefig(file_name, bbox_inches='tight', bbox_extra_artists=(leg,sup_title))  
- 
+    plt.show()
+    plt.clf()
+    
 if __name__ =='__main__':
     import pickle
     dic=pickle.load(open('/home/ecem/eclipse-repos/CONS_RESULTS/networks_synthetic/50000_nodes/30_exp_10percent/result_dic.pickle','r'))

@@ -17,6 +17,8 @@ def save_sampler_distribution(panel, pop_dic=None, cdf=True, plot_each_exp=False
     fig.set_size_inches(single_fig_size[0]*len(panel.major_axis), single_fig_size[1]*len(panel.minor_axis))
     plot_sampler_distribution(panel, pop_dic=pop_dic, cdf=cdf, plot_each_exp=plot_each_exp, title=title , share_x=share_x, share_y=share_y, single_fig_size=single_fig_size, *args, **kwds)
     fig.savefig(file_name, bbox_inches='tight')
+    #plt.show()
+    #plt.close()
     
 def plot_sampler_distribution(panel, pop_dic=None, cdf=True, plot_each_exp=False, title=None , share_x=False, share_y=True, single_fig_size=(8,6), *args, **kwds):
     

@@ -39,7 +39,7 @@ class GraphGenerator:
         logger.info("Generating %s" % self.name)
      
     def largest_connected_component(self,G):
-        return nx.connected_component_subgraphs(G)[0]
+        return sorted(nx.connected_component_subgraphs(G), key = len, reverse=True)[0] #nx.connected_component_subgraphs(G)[0]
 
 class BarabasiAlbertGraphGenerator(GraphGenerator):
      
@@ -51,7 +51,7 @@ class BarabasiAlbertGraphGenerator(GraphGenerator):
         self.m=m 
     
     def generate(self):
-        self.G=nx.convert_node_labels_to_integers(nx.connected_component_subgraphs(nx.barabasi_albert_graph(self.n, self.m, self.seed))[0], first_label=0)
+        self.G=nx.convert_node_labels_to_integers(self.largest_connected_component(nx.barabasi_albert_graph(self.n, self.m, self.seed)), first_label=0)
         GraphGenerator.generate(self)
         return self.G
        
@@ -65,7 +65,7 @@ class WattsStrogatzGraphGenerator(GraphGenerator):
         self.p=p
      
     def generate(self):
-        self.G=nx.convert_node_labels_to_integers(nx.connected_component_subgraphs(nx.watts_strogatz_graph(self.n, self.k, self.p, self.seed))[0])
+        self.G=nx.convert_node_labels_to_integers(self.largest_connected_component(nx.watts_strogatz_graph(self.n, self.k, self.p, self.seed)), first_label=0)
         GraphGenerator.generate(self)
         return self.G
 
@@ -80,7 +80,7 @@ class ErdosRenyiGraphGenerator(GraphGenerator):
         self.directed=directed
 
     def generate(self):
-        self.G=nx.convert_node_labels_to_integers(nx.connected_component_subgraphs(nx.erdos_renyi_graph(self.n, self.p, self.seed))[0])
+        self.G=nx.convert_node_labels_to_integers(self.largest_connected_component(nx.erdos_renyi_graph(self.n, self.p, self.seed)), first_label=0)
         GraphGenerator.generate(self)
         return self.G      
 
@@ -92,7 +92,7 @@ class FromFileGraphGenerator(GraphGenerator):
         self.path=path_to_file
         
     def generate(self, **kwargs):
-        self.G=nx.convert_node_labels_to_integers(nx.connected_component_subgraphs(nx.read_edgelist(path=self.path, nodetype=int, **kwargs))[0])
+        self.G=nx.convert_node_labels_to_integers(self.largest_connected_component(nx.read_edgelist(path=self.path, nodetype=int, **kwargs)), first_label=0)
         GraphGenerator.generate(self)
         return self.G 
 

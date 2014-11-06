@@ -14,7 +14,6 @@
 					</param>
 				</params>
 			</Graph>  
-			
 			<Graph class="WattsStrogatzGraphGenerator">			
 				<folder_name>Watts-Strogatz</folder_name>
 				<params>
@@ -32,38 +31,20 @@
 					</param>
 				</params>
 			</Graph> 
+			<!--
 			<Graph class="ErdosRenyiGraphGenerator">
 				<folder_name>Erdos-Renyi</folder_name>
 				<params>
 					<param>
 						<param_name>n</param_name>
-						<param_value type="int">50000</param_value>
+						<param_value type="int">1000</param_value>
 					</param>
 					<param>
 						<param_name>p</param_name>
-						<param_value type="float">0.0004</param_value>
+						<param_value type="float">0.02</param_value>
 					</param>
 				</params>
 			</Graph>
-			<Graph class="FromFileGraphGenerator">
-				<folder_name>COAUTHOR</folder_name>
-				<distribution_file_name>/home/ecem/eclipse-repos/CONS_RESULTS/networks_real/population_distr/coauthor_normalized_distr_of_chars.pickle</distribution_file_name>
-				<params>
-					<param>
-						<param_name>path_to_file</param_name>
-						<param_value type="str">../networks_real/ca-condmat.txt</param_value>
-					</param>
-					<param>
-						<param_name>name</param_name>
-						<param_value type="str">Coauthor Graph</param_value>
-					</param>
-					<param>
-						<param_name>abbreviation</param_name>
-						<param_value type="str">COAUTHOR</param_value>
-					</param>
-				</params>
-			</Graph>
-			<!-- 
 			<Graph class="FromFileGraphGenerator">
                                 <name>Arxiv COND-MAT Co-author Graph</name>
                                 <params>

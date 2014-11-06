@@ -82,12 +82,12 @@ def execute_single_sampler_for_a_graph(G, sampler, feature_list, query_list, tim
             
             analyzer = analytics.AnalysisGroup()
             
-            analyzer.add_analysis(analytics.SamplerPdfCdfPlotAnalysis(sampler_dic, file_name=os.path.join(os.getcwd(),'CDF_PDF_plot.pdf')))
+            analyzer.add_analysis(analytics.SamplerPdfCdfPlotAnalysis(sampler_dic, title= 'Characteristic Distribution and Descriptive Statistics in the sample graph \n( sampled by '+sampler.name+' )', file_name=os.path.join(os.getcwd(),'CDF_PDF_plot.pdf')))
             analyzer.add_analysis(analytics.SamplerDistributionPlotAnalysis(sampler_dic, pop_dic=G.graph.get('distribution'), title=  'Characteristic Distributions in the sample graph \n( sampled by '+sampler.name+' )' , file_name=os.path.join(os.getcwd(),'CDF_plot.pdf')))
             
             if G.graph.has_key('distribution'):
                 analyzer.add_analysis(analytics.SamplerBoxplotAnalysis(sampler_dic, pop_dic=G.graph['distribution'], divergence=analytics.DivergenceMetrics.JensenShannonDivergence, title=sampler.name + '\n'+analytics.DivergenceMetrics.JensenShannonDivergence().abbreviation,  file_name=os.path.join(os.getcwd(),'boxplot_'+analytics.DivergenceMetrics.JensenShannonDivergence().abbreviation+'.pdf')))
-                analyzer.add_analysis(analytics.SamplerBoxplotAnalysis(sampler_dic, pop_dic=G.graph['distribution'], divergence=analytics.DivergenceMetrics.KolmogorovSmirnovDistance, title=sampler.name + '\n'+analytics.DivergenceMetrics.KolmogorovSmirnovDistance().abbreviation, file_name=os.path.join(os.getcwd(),'boxplot_'+analytics.DivergenceMetrics.KolmogorovSmirnovDistance().abbreviation+'.pdf')))
+                analyzer.add_analysis(analytics.SamplerBoxplotAnalysis(sampler_dic, pop_dic=G.graph['distribution'], divergence=analytics.DivergenceMetrics.KolmogorovSmirnovDistance, title=sampler.name + '\n'+analytics.DivergenceMetrics.KolmogorovSmirnovDistance().abbreviation, file_name=os.path.join(os.getcwd(),'boxplot_'+analytics.DivergenceMetrics.KolmogorovSmirnovDistance().abbreviation+'.pdf'), show=True))
                 analyzer.add_analysis(analytics.SamplerDescriptiveAnalysis(sampler_dic, pop_dic=G.graph['distribution'], divergence=analytics.DivergenceMetrics.JensenShannonDivergence, file_name=os.path.join(os.getcwd(),'summary_'+analytics.DivergenceMetrics.JensenShannonDivergence().abbreviation+'.txt')))
                 analyzer.add_analysis(analytics.SamplerDescriptiveAnalysis(sampler_dic, pop_dic=G.graph['distribution'], divergence=analytics.DivergenceMetrics.KolmogorovSmirnovDistance, file_name=os.path.join(os.getcwd(),'summary_'+analytics.DivergenceMetrics.KolmogorovSmirnovDistance().abbreviation+'.txt')))
             

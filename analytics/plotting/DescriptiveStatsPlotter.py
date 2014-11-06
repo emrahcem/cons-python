@@ -162,7 +162,7 @@ def plot_multiple_distributions(norm_distr_dict, cdf=False, single_figure_size=(
             print_stats_on_the_plot(norm_distr_dict[feature_name])
 
 #Given {'feature_1': distr_dict_1, 'feature_2': distr_dict_2, ... }, saves the plots for both pdfs and cdfs.
-def save_pdf_cdf_plot_for_a_single_graph(feature_dic, title=None, statistics_included=True, file_name='descriptive_statistics.pdf', single_figure_size=(6,4), *args,**kwds):      
+def save_pdf_cdf_plot_for_a_single_graph(feature_dic, title=None, statistics_included=True, file_name='descriptive_statistics.pdf', single_figure_size=(6,4), show=True, *args,**kwds):      
     fig= plt.figure()
     fig.set_size_inches(2*single_figure_size[0], len(feature_dic)*single_figure_size[1])
     plot_pdf_cdf(feature_dic, single_figure_size=single_figure_size, stats=statistics_included, grid=False, lw=2, *args,**kwds)
@@ -170,6 +170,9 @@ def save_pdf_cdf_plot_for_a_single_graph(feature_dic, title=None, statistics_inc
         fig.suptitle(title)
         #fig.suptitle('Characteristic Distribution and Descriptive Statistics in \n '+G.graph['name'], fontsize=16)
     plt.savefig(file_name)
+    if show:
+        plt.show()
+    #plt.close()
     #dump(unnorm_distr_dic,open(G.graph['abbreviation']+"_unnormalized_distr_of_chars.pickle",'w'))
     #dump(feature_dic,open(G.graph['abbreviation']+"_normalized_distr_of_chars.pickle",'w'))
 
@@ -182,7 +185,9 @@ def save_pdf_plot_for_a_single_graph(feature_dic, title=None, statistics_include
         fig.suptitle(title)
         #fig.suptitle('Characteristic Distribution and Descriptive Statistics in \n '+G.graph['name'], fontsize=16)
     plt.savefig(file_name , bbox_inches='tight')
-        
+    plt.show()
+    plt.close()
+     
 if __name__ == "__main__":
     
     #===========================================================================
